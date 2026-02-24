@@ -17,40 +17,79 @@ class CourseCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 220,
-      margin: const EdgeInsets.only(right: 16),
+      width: 260, // Tarjeta un poco más ancha
+      margin: const EdgeInsets.only(right: 20, bottom: 10),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10)],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ClipRRect(
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-            child: Image.network(imageUrl, height: 130, width: double.infinity, fit: BoxFit.cover),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                const SizedBox(height: 4),
-                Text(location, style: const TextStyle(color: Colors.grey, fontSize: 12)),
-                const SizedBox(height: 8),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(price, style: const TextStyle(color: Color(0xFF1B5E20), fontWeight: FontWeight.bold)),
-                    const Icon(Icons.arrow_forward_ios, size: 14, color: Colors.grey),
-                  ],
-                )
-              ],
-            ),
+        borderRadius: BorderRadius.circular(24), // Bordes mucho más redondeados
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF0B3B24).withOpacity(0.15),
+            blurRadius: 20,
+            offset: const Offset(0, 10),
           )
         ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(24),
+        child: Stack(
+          children: [
+            // Imagen de fondo ocupando todo
+            Image.network(imageUrl, height: 260, width: double.infinity, fit: BoxFit.cover),
+            
+            // Degradado oscuro en la parte de abajo para que el texto se lea perfecto
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              height: 120,
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [Colors.transparent, Colors.black.withOpacity(0.8)],
+                  ),
+                ),
+              ),
+            ),
+
+            // Textos sobre la imagen
+            Positioned(
+              bottom: 20,
+              left: 20,
+              right: 20,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    name, 
+                    style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18, letterSpacing: 0.5)
+                  ),
+                  const SizedBox(height: 4),
+                  Row(
+                    children: [
+                      const Icon(Icons.location_on, color: Color(0xFFC5A880), size: 14), // Icono dorado
+                      const SizedBox(width: 4),
+                      Text(location, style: const TextStyle(color: Colors.white70, fontSize: 13)),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFC5A880), // Botón Dorado
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Text(
+                      price, 
+                      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13)
+                    ),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
