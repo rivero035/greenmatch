@@ -17,79 +17,43 @@ class CourseCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 260, // Tarjeta un poco más ancha
-      margin: const EdgeInsets.only(right: 20, bottom: 10),
+      width: 240,
+      margin: const EdgeInsets.only(right: 20),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24), // Bordes mucho más redondeados
-        boxShadow: [
-          BoxShadow(
-            color: const Color(0xFF0B3B24).withOpacity(0.15),
-            blurRadius: 20,
-            offset: const Offset(0, 10),
+        color: Colors.white,
+        border: Border.all(color: Colors.black12, width: 0.5), // Borde finísimo y elegante
+        // Cero BorderRadius = Esquinas rectas, estilo revista
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Imagen limpia
+          Image.network(imageUrl, height: 160, width: double.infinity, fit: BoxFit.cover),
+          
+          // Contenido de texto
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  name.toUpperCase(), // Mayúsculas para dar autoridad
+                  style: const TextStyle(color: Color(0xFF072B15), fontWeight: FontWeight.bold, fontSize: 13, letterSpacing: 1.5)
+                ),
+                const SizedBox(height: 6),
+                Text(location, style: const TextStyle(color: Colors.grey, fontSize: 12, fontFamily: 'sans-serif')),
+                const SizedBox(height: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('FROM $price', style: const TextStyle(color: Color(0xFFB89768), fontWeight: FontWeight.bold, fontSize: 11, fontFamily: 'sans-serif', letterSpacing: 1.0)),
+                    const Icon(Icons.arrow_forward, size: 16, color: Color(0xFF072B15)), // Flecha clásica
+                  ],
+                )
+              ],
+            ),
           )
         ],
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(24),
-        child: Stack(
-          children: [
-            // Imagen de fondo ocupando todo
-            Image.network(imageUrl, height: 260, width: double.infinity, fit: BoxFit.cover),
-            
-            // Degradado oscuro en la parte de abajo para que el texto se lea perfecto
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              height: 120,
-              child: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [Colors.transparent, Colors.black.withOpacity(0.8)],
-                  ),
-                ),
-              ),
-            ),
-
-            // Textos sobre la imagen
-            Positioned(
-              bottom: 20,
-              left: 20,
-              right: 20,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    name, 
-                    style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18, letterSpacing: 0.5)
-                  ),
-                  const SizedBox(height: 4),
-                  Row(
-                    children: [
-                      const Icon(Icons.location_on, color: Color(0xFFC5A880), size: 14), // Icono dorado
-                      const SizedBox(width: 4),
-                      Text(location, style: const TextStyle(color: Colors.white70, fontSize: 13)),
-                    ],
-                  ),
-                  const SizedBox(height: 12),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFC5A880), // Botón Dorado
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Text(
-                      price, 
-                      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13)
-                    ),
-                  )
-                ],
-              ),
-            )
-          ],
-        ),
       ),
     );
   }

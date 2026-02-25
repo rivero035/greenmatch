@@ -14,19 +14,30 @@ class GreenMatchApp extends StatelessWidget {
       title: 'GreenMatch',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        // Fondo gris perlado muy sutil, más elegante que el blanco puro
-        scaffoldBackgroundColor: const Color(0xFFF8F9FA),
+        // Nuevo fondo: Verde Pino Nocturno (más suave que el negro)
+        scaffoldBackgroundColor: const Color(0xFF16231C),
+        
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF0B3B24), // Verde oscuro premium
-          primary: const Color(0xFF0B3B24),
-          secondary: const Color(0xFFC5A880), // Dorado/Champán
+          brightness: Brightness.dark,
+          seedColor: const Color(0xFFC5A880), // Oro Champán
+          primary: const Color(0xFFC5A880),
+          surface: const Color(0xFF223329), // Gris verdoso un pelín más claro para las tarjetas
         ),
+        
+        fontFamily: 'Georgia',
+        
         useMaterial3: true,
         appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFFF8F9FA),
+          backgroundColor: Color(0xFF16231C),
           elevation: 0,
-          iconTheme: IconThemeData(color: Color(0xFF0B3B24)),
-          titleTextStyle: TextStyle(color: Color(0xFF0B3B24), fontSize: 20, fontWeight: FontWeight.w600),
+          iconTheme: IconThemeData(color: Color(0xFFC5A880)),
+          titleTextStyle: TextStyle(
+            color: Colors.white, 
+            fontSize: 24, 
+            fontWeight: FontWeight.w600,
+            fontFamily: 'Georgia', 
+            letterSpacing: 0.5,
+          ),
         ),
       ),
       home: const MainScreen(),

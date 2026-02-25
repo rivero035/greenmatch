@@ -6,113 +6,192 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: const Color(0xFFF8F9FA),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: const Color(0xFFF8F9FA),
         elevation: 0,
-        title: const Text('My Profile', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+        title: const Text('Profile', style: TextStyle(color: Color(0xFF0B3B24), fontWeight: FontWeight.bold, fontSize: 24)),
         centerTitle: true,
         actions: [
           IconButton(
-            icon: const Icon(Icons.settings, color: Colors.black),
+            icon: const Icon(Icons.settings_outlined, color: Color(0xFF0B3B24)),
             onPressed: () {},
           )
         ],
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(height: 24),
-            
-            // --- Avatar e Información principal ---
-            const Center(
-              child: CircleAvatar(
-                radius: 50,
-                backgroundImage: NetworkImage('https://randomuser.me/api/portraits/men/32.jpg'),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // --- Cabecera: Foto y Estadísticas (Estilo Playtomic) ---
+              Row(
+                children: [
+                  const CircleAvatar(
+                    radius: 40,
+                    backgroundImage: NetworkImage('https://randomuser.me/api/portraits/men/32.jpg'),
+                  ),
+                  const SizedBox(width: 20),
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        _buildStatColumn('34', 'Matches'),
+                        _buildStatColumn('128', 'Followers'),
+                        _buildStatColumn('95', 'Following'),
+                      ],
+                    ),
+                  )
+                ],
               ),
-            ),
-            const SizedBox(height: 16),
-            const Text('Carlos', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-            const Text('Andalusia, Spain', style: TextStyle(color: Colors.grey, fontSize: 14)),
-            const SizedBox(height: 24),
+              const SizedBox(height: 16),
+              const Text('Carlos', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Color(0xFF0B3B24))),
+              const Text('Seville, Andalusia', style: TextStyle(color: Colors.grey, fontSize: 14)),
+              const SizedBox(height: 24),
 
-            // --- Tarjeta de Estadísticas ---
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Container(
-                padding: const EdgeInsets.all(16),
+              // --- Botones de Acción ---
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: const Color(0xFF0B3B24),
+                        side: const BorderSide(color: Color(0xFF0B3B24)),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                      ),
+                      onPressed: () {},
+                      child: const Text('Edit Profile', style: TextStyle(fontWeight: FontWeight.bold)),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFFC5A880), // Dorado Premium
+                        foregroundColor: Colors.white,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                      ),
+                      onPressed: () {},
+                      child: const Text('Get Premium', style: TextStyle(fontWeight: FontWeight.bold)),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 32),
+
+              // --- Tarjeta de Nivel (Hándicap) ---
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10)],
+                  gradient: const LinearGradient(
+                    colors: [Color(0xFF0B3B24), Color(0xFF145A38)],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(color: const Color(0xFF0B3B24).withOpacity(0.2), blurRadius: 15, offset: const Offset(0, 8))
+                  ],
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildStatColumn('Handicap', '18.2'),
-                    _buildDivider(),
-                    _buildStatColumn('Matches', '34'),
-                    _buildDivider(),
-                    _buildStatColumn('Avg Score', '92'),
+                    const Text('Handicap Level', style: TextStyle(color: Colors.white70, fontSize: 14)),
+                    const SizedBox(height: 4),
+                    const Text('18.2', style: TextStyle(color: Color(0xFFC5A880), fontSize: 40, fontWeight: FontWeight.bold)),
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          foregroundColor: const Color(0xFF0B3B24),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                        ),
+                        onPressed: () {},
+                        child: const Text('Play matches to improve', style: TextStyle(fontWeight: FontWeight.bold)),
+                      ),
+                    )
                   ],
                 ),
               ),
-            ),
-            const SizedBox(height: 32),
+              const SizedBox(height: 32),
 
-            // --- Opciones del Menú ---
-            _buildMenuOption(Icons.history, 'Match History'),
-            _buildMenuOption(Icons.bar_chart, 'Statistics & Progress'),
-            _buildMenuOption(Icons.group, 'My Friends'),
-            _buildMenuOption(Icons.payment, 'Payment Methods'),
-            const SizedBox(height: 24),
-            
-            // --- Botón de Cerrar Sesión ---
-            TextButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.logout, color: Colors.red),
-              label: const Text('Log Out', style: TextStyle(color: Colors.red, fontSize: 16)),
-            ),
-            const SizedBox(height: 30),
-          ],
+              // --- Preferencias del Jugador ---
+              const Text('Player Preferences', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF0B3B24))),
+              const SizedBox(height: 12),
+              _buildPreferenceRow(Icons.wb_sunny_outlined, 'Preferred Time', 'Morning'),
+              _buildPreferenceRow(Icons.emoji_events_outlined, 'Favorite Modality', 'Stableford'),
+              const SizedBox(height: 32),
+
+              // --- Funciones Exclusivas Premium ---
+              Row(
+                children: [
+                  const Icon(Icons.star, color: Color(0xFFC5A880), size: 20),
+                  const SizedBox(width: 8),
+                  const Text('Premium Features', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF0B3B24))),
+                ],
+              ),
+              const SizedBox(height: 12),
+              _buildPremiumRow(Icons.groups, 'Golf Community (Feed)'),
+              _buildPremiumRow(Icons.electric_car, 'Reserve "My Buggy"'),
+              _buildPremiumRow(Icons.gavel, 'Rules AI Assistant'),
+              const SizedBox(height: 40),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  // Widget reutilizable para los números de estadísticas
-  Widget _buildStatColumn(String label, String value) {
+  // --- Widgets Reutilizables ---
+  
+  Widget _buildStatColumn(String value, String label) {
     return Column(
       children: [
-        Text(value, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Color(0xFF1B5E20))),
-        const SizedBox(height: 4),
-        Text(label, style: const TextStyle(color: Colors.grey, fontSize: 12)),
+        Text(value, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF0B3B24))),
+        Text(label, style: const TextStyle(color: Colors.grey, fontSize: 13)),
       ],
     );
   }
 
-  // Widget reutilizable para la línea separadora vertical
-  Widget _buildDivider() {
+  Widget _buildPreferenceRow(IconData icon, String title, String value) {
     return Container(
-      height: 40,
-      width: 1,
-      color: Colors.grey[300],
+      margin: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12)),
+      child: Row(
+        children: [
+          Icon(icon, color: Colors.grey, size: 22),
+          const SizedBox(width: 16),
+          Expanded(child: Text(title, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500))),
+          Text(value, style: const TextStyle(color: Color(0xFFC5A880), fontWeight: FontWeight.bold)),
+        ],
+      ),
     );
   }
 
-  // Widget reutilizable para las filas del menú
-  Widget _buildMenuOption(IconData icon, String title) {
+  Widget _buildPremiumRow(IconData icon, String title) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 2, left: 16, right: 16),
+      margin: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
+        color: const Color(0xFFC5A880).withOpacity(0.1),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFFC5A880).withOpacity(0.3)),
       ),
-      child: ListTile(
-        leading: Icon(icon, color: const Color(0xFF1B5E20)),
-        title: Text(title, style: const TextStyle(fontWeight: FontWeight.w500)),
-        trailing: const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
-        onTap: () {}, // Aquí irá la acción en el futuro
+      child: Row(
+        children: [
+          Icon(icon, color: const Color(0xFFC5A880), size: 22),
+          const SizedBox(width: 16),
+          Expanded(child: Text(title, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Color(0xFF0B3B24)))),
+          const Icon(Icons.lock_outline, color: Color(0xFFC5A880), size: 18), // Candado para indicar que es de pago
+        ],
       ),
     );
   }
