@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF16231C), // Nuevo fondo Verde Pino Nocturno
+      backgroundColor: const Color(0xFF16231C), 
       appBar: AppBar(
         backgroundColor: const Color(0xFF16231C),
         elevation: 0,
@@ -108,27 +108,29 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(height: 16),
               
+              // ------------------------------------------------------------------
+              // 🔥 SOLUCIÓN 1: CAMBIAMOS LA ALTURA DE 280 A 320 PARA EVITAR EL OVERFLOW
+              // ------------------------------------------------------------------
               SizedBox(
-                height: 280,
+                height: 320, // <--- ¡AQUÍ ESTÁ LA MAGIA DEL ESPACIO!
                 child: ListView(
                   scrollDirection: Axis.horizontal,
-                  clipBehavior: Clip.none, // Permite que el escudo no se corte por abajo
+                  clipBehavior: Clip.none, 
                   children: const [
                     CourseCard(
                       name: 'Seville Golf Club',
                       location: 'Andalusia',
                       price: '€65',
-                      imageUrl: 'https://images.unsplash.com/photo-1587174486073-ae5e1c47f4a9?auto=format&fit=crop&w=600&q=80',
-                      // --- AQUÍ ESTÁ EL ESCUDO ---
-                      crestUrl: 'https://cdn-icons-png.flaticon.com/512/3232/3232049.png', 
+                      // 🔥 SOLUCIÓN 2: URLs de diseño a prueba de balas (CORS Bypass)
+                      imageUrl: 'https://placehold.co/600x400/16231C/C5A880?text=Seville+Golf+Club&font=playfair-display',
+                      crestUrl: 'https://placehold.co/100x100/C5A880/16231C?text=SGC&font=playfair-display', 
                     ),
                     CourseCard(
                       name: 'Real Club Pineda',
                       location: 'Andalusia',
                       price: '€85',
-                      imageUrl: 'https://images.unsplash.com/photo-1535136140558-542617300c14?auto=format&fit=crop&w=600&q=80',
-                      // --- Y AQUÍ EL OTRO ESCUDO ---
-                      crestUrl: 'https://cdn-icons-png.flaticon.com/512/1041/1041127.png',
+                      imageUrl: 'https://placehold.co/600x400/16231C/C5A880?text=Real+Club+Pineda&font=playfair-display',
+                      crestUrl: 'https://placehold.co/100x100/C5A880/16231C?text=RCP&font=playfair-display',
                     ),
                   ],
                 ),

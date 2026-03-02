@@ -13,15 +13,11 @@ class CourseCard extends StatelessWidget {
     required this.location,
     required this.price,
     required this.imageUrl,
-    this.crestUrl = 'https://cdn-icons-png.flaticon.com/512/3232/3232049.png', 
+    required this.crestUrl, 
   });
 
   @override
   Widget build(BuildContext context) {
-    // 🛡️ TRUCO ANTI-CORS: Envolvemos las URLs en un proxy gratuito para que el navegador web no las bloquee
-    final String safeImageUrl = 'https://corsproxy.io/?${Uri.encodeComponent(imageUrl)}';
-    final String safeCrestUrl = 'https://corsproxy.io/?${Uri.encodeComponent(crestUrl)}';
-
     return Container(
       width: 250,
       margin: const EdgeInsets.only(right: 20),
@@ -35,19 +31,19 @@ class CourseCard extends StatelessWidget {
           Stack(
             clipBehavior: Clip.none,
             children: [
-              // Usamos la URL segura
+              // Foto del campo
               Image.network(
-                safeImageUrl, 
+                imageUrl, 
                 height: 160, 
                 width: double.infinity, 
                 fit: BoxFit.cover,
-                // Añadimos esto por si el proxy falla, que no pete la app
                 errorBuilder: (context, error, stackTrace) => Container(
                   height: 160, width: double.infinity, color: Colors.grey[200],
-                  child: const Icon(Icons.image_not_supported, color: Colors.grey),
+                  child: const Icon(Icons.broken_image, color: Colors.grey),
                 ),
               ),
               
+              // Escudo
               Positioned(
                 bottom: -24, 
                 right: 16,
@@ -60,9 +56,8 @@ class CourseCard extends StatelessWidget {
                   child: CircleAvatar(
                     radius: 24,
                     backgroundColor: Colors.transparent,
-                    // Usamos la URL segura para el escudo
-                    backgroundImage: NetworkImage(safeCrestUrl),
-                    onBackgroundImageError: (exception, stackTrace) {}, // Evita errores rojos
+                    backgroundImage: NetworkImage(crestUrl),
+                    onBackgroundImageError: (e, s) {}, 
                   ),
                 ),
               )
