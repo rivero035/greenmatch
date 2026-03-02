@@ -24,54 +24,50 @@ class MatchCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: Colors.black12, width: 0.5),
-        // Esquinas rectas de nuevo
+        color: const Color(0xFF0A120D), // Fondo carbón casi negro
+        border: Border.all(color: Colors.white12, width: 0.5), // Borde súper fino y sutil
+        // Esquinas rectas para mantener el estilo lujo editorial
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Título y Modalidad
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(course, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color(0xFF072B15))),
-              Text(modality.toUpperCase(), style: const TextStyle(color: Color(0xFFB89768), fontWeight: FontWeight.bold, fontSize: 10, letterSpacing: 1.5, fontFamily: 'sans-serif')),
+              Text(course, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white)),
+              Text(modality.toUpperCase(), style: const TextStyle(color: Color(0xFFC5A880), fontWeight: FontWeight.bold, fontSize: 10, letterSpacing: 1.5, fontFamily: 'sans-serif')),
             ],
           ),
           const SizedBox(height: 12),
           
-          // Detalles
           Row(
             children: [
-              const Icon(Icons.schedule, size: 14, color: Colors.grey),
+              const Icon(Icons.schedule, size: 14, color: Colors.white54),
               const SizedBox(width: 8),
-              Text(time, style: const TextStyle(color: Colors.black87, fontSize: 13, fontFamily: 'sans-serif')),
+              Text(time, style: const TextStyle(color: Colors.white70, fontSize: 13, fontFamily: 'sans-serif')),
             ],
           ),
           const SizedBox(height: 6),
           Row(
             children: [
-              const Icon(Icons.flag_outlined, size: 14, color: Colors.grey),
+              const Icon(Icons.flag_outlined, size: 14, color: Colors.white54),
               const SizedBox(width: 8),
-              Text(requirement, style: const TextStyle(color: Colors.grey, fontSize: 13, fontFamily: 'sans-serif')),
+              Text(requirement, style: const TextStyle(color: Colors.white54, fontSize: 13, fontFamily: 'sans-serif')),
             ],
           ),
           
-          // Línea separadora ultra fina
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 16.0),
-            child: Divider(height: 1, thickness: 0.5, color: Colors.black12),
+            child: Divider(height: 1, thickness: 0.5, color: Colors.white12),
           ),
 
-          // Jugadores y botón
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
                   if (playerImages.isEmpty)
-                    const Text('Be the first to join', style: TextStyle(color: Colors.grey, fontSize: 13, fontStyle: FontStyle.italic, fontFamily: 'sans-serif'))
+                    const Text('Be the first to join', style: TextStyle(color: Colors.white54, fontSize: 13, fontStyle: FontStyle.italic, fontFamily: 'sans-serif'))
                   else
                     SizedBox(
                       height: 28,
@@ -83,7 +79,7 @@ class MatchCard extends StatelessWidget {
                             child: Container(
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                border: Border.all(color: Colors.white, width: 1.5),
+                                border: Border.all(color: const Color(0xFF0A120D), width: 1.5),
                               ),
                               child: CircleAvatar(
                                 radius: 12,
@@ -95,16 +91,16 @@ class MatchCard extends StatelessWidget {
                       ),
                     ),
                   const SizedBox(width: 12),
-                  Text(status, style: const TextStyle(color: Color(0xFF072B15), fontWeight: FontWeight.w600, fontSize: 12, fontFamily: 'sans-serif')),
+                  Text(status, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 12, fontFamily: 'sans-serif')),
                 ],
               ),
               
-              // Botón "Join" con esquinas rectas y texto espaciado
+              // Botón "Join" dorado con bordes rectos
               OutlinedButton(
                 style: OutlinedButton.styleFrom(
-                  foregroundColor: const Color(0xFF072B15),
-                  side: const BorderSide(color: Color(0xFF072B15), width: 1),
-                  shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero), // ¡Bordes 100% rectos!
+                  foregroundColor: const Color(0xFFC5A880),
+                  side: const BorderSide(color: Color(0xFFC5A880), width: 1),
+                  shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero), 
                   padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                 ),
                 onPressed: () {},
