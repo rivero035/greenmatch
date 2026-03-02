@@ -112,18 +112,23 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 280,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
+                  clipBehavior: Clip.none, // Permite que el escudo no se corte por abajo
                   children: const [
                     CourseCard(
                       name: 'Seville Golf Club',
                       location: 'Andalusia',
                       price: '€65',
                       imageUrl: 'https://images.unsplash.com/photo-1587174486073-ae5e1c47f4a9?auto=format&fit=crop&w=600&q=80',
+                      // --- AQUÍ ESTÁ EL ESCUDO ---
+                      crestUrl: 'https://cdn-icons-png.flaticon.com/512/3232/3232049.png', 
                     ),
                     CourseCard(
                       name: 'Real Club Pineda',
                       location: 'Andalusia',
                       price: '€85',
                       imageUrl: 'https://images.unsplash.com/photo-1535136140558-542617300c14?auto=format&fit=crop&w=600&q=80',
+                      // --- Y AQUÍ EL OTRO ESCUDO ---
+                      crestUrl: 'https://cdn-icons-png.flaticon.com/512/1041/1041127.png',
                     ),
                   ],
                 ),
