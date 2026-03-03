@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/main_screen.dart';
+import 'screens/login_screen.dart'; // Importamos la nueva pantalla
 
 void main() {
   runApp(const GreenMatchApp());
@@ -14,33 +14,28 @@ class GreenMatchApp extends StatelessWidget {
       title: 'GreenMatch',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        // Nuevo fondo: Verde Pino Nocturno (más suave que el negro)
-        scaffoldBackgroundColor: const Color(0xFF16231C),
-        
+        scaffoldBackgroundColor: const Color(0xFFF8F5F0),
         colorScheme: ColorScheme.fromSeed(
-          brightness: Brightness.dark,
-          seedColor: const Color(0xFFC5A880), // Oro Champán
-          primary: const Color(0xFFC5A880),
-          surface: const Color(0xFF223329), // Gris verdoso un pelín más claro para las tarjetas
+          seedColor: const Color(0xFF072B15), 
+          primary: const Color(0xFF072B15),
+          secondary: const Color(0xFFB89768), 
         ),
-        
-        fontFamily: 'Georgia',
-        
+        fontFamily: 'Georgia', 
         useMaterial3: true,
         appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFF16231C),
+          backgroundColor: Color(0xFFF8F5F0),
           elevation: 0,
-          iconTheme: IconThemeData(color: Color(0xFFC5A880)),
+          iconTheme: IconThemeData(color: Color(0xFF072B15)),
           titleTextStyle: TextStyle(
-            color: Colors.white, 
+            color: Color(0xFF072B15), 
             fontSize: 24, 
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.bold,
             fontFamily: 'Georgia', 
-            letterSpacing: 0.5,
           ),
         ),
       ),
-      home: const MainScreen(),
+      // AQUÍ ESTÁ EL CAMBIO: La app arranca en la pantalla de Login
+      home: const LoginScreen(),
     );
   }
 }
